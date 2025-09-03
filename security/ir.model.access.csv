@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_widget_configuration,access_widget_configuration,model_widget_configuration,,1,1,1,1
+access_upcoming_production_schedule,access_upcoming_production_schedule,model_upcoming_production_schedule,,1,1,1,1
+access_raw_material_readiness,access_raw_material_readiness,model_raw_material_readiness,,1,1,1,1

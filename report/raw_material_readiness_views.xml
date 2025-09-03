@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="view_raw_material_readiness_tree" model="ir.ui.view">
+        <field name="name">raw.material.readiness.tree</field>
+        <field name="model">raw.material.readiness</field>
+        <field name="arch" type="xml">
+            <tree string="Raw Material Readiness">
+                <field name="date"/>
+                <field name="product_id"/>
+                <field name="product_code"/>
+                <field name="required_qty"/>
+                <field name="setting_name" optional="hide"/>
+                <field name="forecast_stock"/>
+                <field name="priority"/>
+            </tree>
+        </field>
+    </record>
+        <record id="view_raw_material_readiness_search" model="ir.ui.view">
+        <field name="name">raw.material.readiness.search</field>
+        <field name="model">raw.material.readiness</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="product_id"/>
+                <group expand="0" string="Group By">
+                    <filter name="group_by_product"
+                            string="Product"
+                            context="{'group_by': 'product_id'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+
+    <record id="action_raw_material_readiness" model="ir.actions.act_window">
+        <field name="name">Raw Material Readiness</field>
+        <field name="res_model">raw.material.readiness</field>
+        <field name="view_mode">tree</field>
+        <field name="context">{'search_default_group_by_product': 1}</field>
+    </record>
+
+    <menuitem id="menu_raw_material_readiness"
+              name="Raw Material Readiness"
+              parent="menu_widget_configuration_root"
+              action="action_raw_material_readiness"
+              sequence="50"/>
+</odoo>

@@ -1,0 +1,44 @@
+<odoo>
+    <record id="view_widget_configuration_tree" model="ir.ui.view">
+        <field name="name">widget.configuration.tree</field>
+        <field name="model">widget.configuration</field>
+        <field name="arch" type="xml">
+            <tree string="Widget Configurations" editable="bottom">
+                <field name="name"/>
+                <field name="no_of_days"/>
+                <field name="widget"/>
+                <button name="get_data" type="object" string="Get Upcoming Production Schedule" class="oe_highlight"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Optional: Form view to open from tree -->
+<!--    <record id="view_widget_configuration_form" model="ir.ui.view">-->
+<!--        <field name="name">widget.configuration.form</field>-->
+<!--        <field name="model">widget.configuration</field>-->
+<!--        <field name="arch" type="xml">-->
+<!--            <form string="Widget Configuration">-->
+<!--                <sheet>-->
+<!--                    <group>-->
+<!--                        <field name="name"/>-->
+<!--                        <field name="no_of_days"/>-->
+<!--                    </group>-->
+<!--                </sheet>-->
+<!--            </form>-->
+<!--        </field>-->
+<!--    </record>-->
+
+    <!-- Optional: Action to show tree view -->
+    <record id="action_widget_configuration" model="ir.actions.act_window">
+        <field name="name">Widget Configurations</field>
+        <field name="res_model">widget.configuration</field>
+        <field name="view_mode">tree</field>
+    </record>
+
+    <!-- Optional: Menu item to access it -->
+    <menuitem id="menu_widget_configuration_root" name="Widget Configurations" parent="mrp.menu_mrp_configuration"/>
+    <menuitem id="menu_widget_configuration"
+              name="Configurations"
+              parent="menu_widget_configuration_root"
+              action="action_widget_configuration"/>
+</odoo>

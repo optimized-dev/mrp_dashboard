@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <menuitem name="Manufacturing Dashboard" id="manufacturing_dashboard_menu_action" action="manufacturing_dashboard_action"
+              parent="dynamic_manufacturing_extend.operation_kanban_menu"/>
+</odoo>

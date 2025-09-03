@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="view_upcoming_production_schedule_tree" model="ir.ui.view">
+        <field name="name">upcoming.production.schedule.tree</field>
+        <field name="model">upcoming.production.schedule</field>
+        <field name="arch" type="xml">
+            <tree string="Upcoming Production Schedule">
+                <field name="date"/>
+                <field name="product_id"/>
+                <field name="product_code"/>
+                <field name="planned_qty"/>
+                <field name="setting_name" optional="hide"/>
+                <field name="forecast_stock"/>
+                <field name="priority"/>
+            </tree>
+        </field>
+    </record>
+        <record id="view_production_upcoming_search" model="ir.ui.view">
+        <field name="name">production.upcoming.search</field>
+        <field name="model">upcoming.production.schedule</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="product_id"/>
+                <group expand="0" string="Group By">
+                    <filter name="group_by_product"
+                            string="Product"
+                            context="{'group_by': 'product_id'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+
+    <record id="action_upcoming_production_schedule" model="ir.actions.act_window">
+        <field name="name">Upcoming Production Schedule</field>
+        <field name="res_model">upcoming.production.schedule</field>
+        <field name="view_mode">tree</field>
+        <field name="context">{'search_default_group_by_product': 1}</field>
+    </record>
+
+    <menuitem id="menu_upcoming_production_schedule"
+              name="Upcoming Production Schedule"
+              parent="menu_widget_configuration_root"
+              action="action_upcoming_production_schedule"
+              sequence="50"/>
+</odoo>
