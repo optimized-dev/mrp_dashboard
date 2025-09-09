@@ -2,3 +2,6 @@ id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 access_widget_configuration,access_widget_configuration,model_widget_configuration,,1,1,1,1
 access_upcoming_production_schedule,access_upcoming_production_schedule,model_upcoming_production_schedule,,1,1,1,1
 access_raw_material_readiness,access_raw_material_readiness,model_raw_material_readiness,,1,1,1,1
+access_demand_forecast,access_demand_forecast,model_demand_forecast,,1,1,1,1
+access_order_priority_queue,access_order_priority_queue,model_order_priority_queue,,1,1,1,1
+access_current_production_status,access_current_production_status,model_current_production_status,,1,1,1,1

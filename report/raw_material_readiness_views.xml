@@ -10,7 +10,7 @@
                 <field name="product_code"/>
                 <field name="required_qty"/>
                 <field name="setting_name" optional="hide"/>
-                <field name="forecast_stock"/>
+                <field name="forecast_stock" string="Available Qty"/>
                 <field name="priority"/>
             </tree>
         </field>

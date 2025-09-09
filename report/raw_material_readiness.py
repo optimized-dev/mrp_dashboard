@@ -13,7 +13,7 @@ class RawMaterialReadiness(models.Model):
     setting_name = fields.Char(string="Horizon", readonly=True)
     product_code = fields.Char(string="Product Code", readonly=True)
     forecast_stock = fields.Float(
-        string="Forecast Stock",
+        string="Available Qty",
         compute="_compute_forecast",
         store=False,
         readonly=True

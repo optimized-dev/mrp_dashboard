@@ -26,12 +26,15 @@
 
     'data': [
         'security/ir.model.access.csv',
-        'views/manufacturing_dashboard_views.xml',
-        'views/menu_action.xml',
+        # 'views/manufacturing_dashboard_views.xml',
+        # 'views/menu_action.xml',
         'views/widget_configuration_views.xml',
         # 'wizard/widget_data_views.xml',
         'report/upcoming_production_schedule_views.xml',
-        'report/raw_material_readiness_views.xml'
+        'report/raw_material_readiness_views.xml',
+        'report/demand_forecast_views.xml',
+        'report/order_priority_queue_Views.xml',
+        'report/current_production_status_views.xml',
     ],
     # 'assets': {
     #     'web.assets_backend': [

@@ -1,0 +1,59 @@
+<odoo>
+    <!-- Action -->
+    <record id="action_mrp_planning_progress" model="ir.actions.act_window">
+        <field name="name">MRP Planning Progress</field>
+        <field name="res_model">current.production.status</field>
+        <field name="view_mode">tree,form</field>
+        <field name="target">current</field>
+    </record>
+
+    <!-- Menu Item -->
+
+    <!-- Tree View -->
+    <record id="view_mrp_planning_progress_tree" model="ir.ui.view">
+        <field name="name">mrp.planning.progress.tree</field>
+        <field name="model">current.production.status</field>
+        <field name="arch" type="xml">
+            <tree string="MRP Planning Progress" default_order="planning_date desc">
+                <field name="product_id"/>
+                <field name="product_name"/>
+                <field name="planning_date"/>
+                <field name="production_start"/>
+                <field name="production_end"/>
+                <field name="product_uom_qty"/>
+                <field name="actual_qty"/>
+                <field name="progress_percentage"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Form View -->
+    <record id="view_mrp_planning_progress_form" model="ir.ui.view">
+        <field name="name">mrp.planning.progress.form</field>
+        <field name="model">current.production.status</field>
+        <field name="arch" type="xml">
+            <form string="MRP Planning Progress">
+                <sheet>
+                    <group>
+                        <field name="product_id"/>
+                        <field name="product_name"/>
+                        <field name="planning_date"/>
+                        <field name="production_start"/>
+                        <field name="production_end"/>
+                    </group>
+                    <group>
+                        <field name="product_uom_qty"/>
+                        <field name="actual_qty"/>
+                        <field name="progress_percentage"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <menuitem id="menu_mrp_planning_progress_root"
+              name="Planning Progress"
+              parent="menu_widget_configuration_root"
+              action="action_mrp_planning_progress"
+              sequence="50"/>
+
+</odoo>
