@@ -22,7 +22,7 @@
     'website': "https:www.optimized.lk",
     'maintainer': 'Avishka Deshan',
     'category': 'Inventory',
-    'depends': ['mrp', 'manufacturing_extend'],
+    'depends': ['mrp', 'manufacturing_extend', 'dynamic_manufacturing_extend'],
 
     'data': [
         'security/ir.model.access.csv',
@@ -35,6 +35,7 @@
         'report/demand_forecast_views.xml',
         'report/order_priority_queue_Views.xml',
         'report/current_production_status_views.xml',
+        'report/work_center_production_views.xml',
     ],
     # 'assets': {
     #     'web.assets_backend': [
