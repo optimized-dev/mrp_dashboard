@@ -1,0 +1,26 @@
+<odoo>
+    <record id="view_stepwise_production_flow_tracker_tree" model="ir.ui.view">
+        <field name="name">stepwise.production.flow.tracker.tree</field>
+        <field name="model">stepwise.production.flow.tracker</field>
+        <field name="arch" type="xml">
+            <tree string="Stepwise Production Flow Tracker">
+                <field name="production_stage_id"/>
+                <field name="total_planned_qty"/>
+                <field name="total_out"/>
+                <field name="progress"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_stepwise_production_flow_tracker" model="ir.actions.act_window">
+        <field name="name">Stepwise Production Flow</field>
+        <field name="res_model">stepwise.production.flow.tracker</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="menu_stepwise_production_flow_tracker"
+              name="Stepwise Tracker"
+              parent="menu_widget_configuration_root"
+              action="action_stepwise_production_flow_tracker"/>
+
+</odoo>

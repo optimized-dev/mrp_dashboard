@@ -6,3 +6,4 @@ access_demand_forecast,access_demand_forecast,model_demand_forecast,,1,1,1,1
 access_order_priority_queue,access_order_priority_queue,model_order_priority_queue,,1,1,1,1
 access_current_production_status,access_current_production_status,model_current_production_status,,1,1,1,1
 access_work_centre_production,access_work_centre_production,model_work_centre_production,,1,1,1,1
+access_stepwise_production_flow_tracker,access_stepwise_production_flow_tracker,model_stepwise_production_flow_tracker,,1,1,1,1

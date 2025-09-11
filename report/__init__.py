@@ -4,4 +4,5 @@ from . import demand_forecast
 from . import order_priority_queue
 from . import current_production_status
 from . import work_center_production
+from . import stepwise_production_flow_tracker
 
