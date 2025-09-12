@@ -1,0 +1,40 @@
+<odoo>
+    <record id="view_work_centre_wastage_tree" model="ir.ui.view">
+        <field name="name">work.centre.wastage.tree</field>
+        <field name="model">work.centre.wastage</field>
+        <field name="arch" type="xml">
+            <tree string="Work Centre Wastage">
+                <field name="operation_name"/>
+                <field name="line_id"/>
+                <field name="time_from"/>
+                <field name="time_to"/>
+                <field name="product_id"/>
+                <field name="planned_qty"/>
+                <field name="wastage_qty"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_work_centre_wastage_search" model="ir.ui.view">
+        <field name="name">work.centre.wastage.search</field>
+        <field name="model">work.centre.wastage</field>
+        <field name="arch" type="xml">
+            <search string="Search Work Centre Wastage">
+                <field name="operation_name"/>
+                <field name="line_id"/>
+                <field name="product_id"/>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_work_centre_wastage" model="ir.actions.act_window">
+        <field name="name">Work Centre Wastage</field>
+        <field name="res_model">work.centre.wastage</field>
+        <field name="view_mode">tree</field>
+    </record>
+
+    <menuitem id="menu_work_centre_wastage_root"
+              name="Work Centre Wastage"
+              parent="menu_widget_configuration_root"
+              action="action_work_centre_wastage"/>
+</odoo>
