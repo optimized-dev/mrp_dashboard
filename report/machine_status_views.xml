@@ -1,0 +1,63 @@
+<odoo>
+    <!-- Tree (List) View -->
+    <record id="view_machine_status_tree" model="ir.ui.view">
+        <field name="name">machine.status.view.tree</field>
+        <field name="model">machine.status.view</field>
+        <field name="arch" type="xml">
+            <tree string="Machine Status">
+                <field name="machine_id"/>
+                <field name="machine_state"/>
+                <field name="status_emoji"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Kanban (Grid) View -->
+<!--<odoo>-->
+    <record id="view_machine_status_kanban" model="ir.ui.view">
+        <field name="name">machine.status.view.kanban</field>
+        <field name="model">machine.status.view</field>
+        <field name="arch" type="xml">
+            <kanban class="o_kanban_small_column" default_group_by="machine_state">
+                <field name="machine_id"/>
+                <field name="machine_state"/>
+                <field name="status_emoji"/>
+
+                <templates>
+                    <t t-name="kanban-box">
+                        <div t-attf-class="oe_kanban_card o_kanban_record
+                             o_kanban_color_#{record.machine_state.raw_value}"
+                             style="padding:10px; text-align:center; border-radius:15px; box-shadow:0 2px 5px rgba(0,0,0,0.2);">
+
+                            <div style="font-size: 50px; margin-bottom: 10px;">
+                                <t t-esc="record.status_emoji"/>
+                            </div>
+
+                            <div style="font-weight:bold; font-size:16px; color:#333;">
+                                <t t-esc="record.machine_id.display_name"/>
+                            </div>
+
+                            <div style="margin-top:5px; font-size:14px; color:#555;">
+                                <t t-esc="record.machine_state"/>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>    <!-- Action to open the views -->
+    <record id="action_machine_status_view" model="ir.actions.act_window">
+        <field name="name">Machine Status</field>
+        <field name="res_model">machine.status.view</field>
+        <field name="view_mode">kanban,tree</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Shows the machine status with running/fault emojis.
+            </p>
+        </field>
+    </record>
+
+    <!-- Menu item -->
+    <menuitem id="menu_machine_status_view" name="Machine Status Dashboard"
+              parent="menu_widget_configuration_root" action="action_machine_status_view" sequence="1"/>
+</odoo>

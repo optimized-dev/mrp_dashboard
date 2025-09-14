@@ -38,6 +38,7 @@
         'report/work_center_production_views.xml',
         'report/stepwise_production_flow_tracker_views.xml',
         'report/work_center_wastage_views.xml',
+        'report/machine_status_views.xml',
     ],
     # 'assets': {
     #     'web.assets_backend': [
