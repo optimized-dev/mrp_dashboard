@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- Tree (List) View -->
+    <record id="view_capacity_planning_tree" model="ir.ui.view">
+        <field name="name">capacity.planning.tree</field>
+        <field name="model">capacity.planning</field>
+        <field name="arch" type="xml">
+            <tree string="Capacity Planning">
+                <field name="resources"/>
+                <field name="allocated_time_hours"/>
+                <field name="total_capacity"/>
+                <field name="used_percent"/>
+                <field name="buffer"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Graph (Bar) View -->
+    <record id="view_capacity_planning_graph" model="ir.ui.view">
+        <field name="name">capacity.planning.graph</field>
+        <field name="model">capacity.planning</field>
+        <field name="arch" type="xml">
+            <graph string="Capacity Planning" type="bar">
+                <field name="resources" type="row"/>
+                <field name="allocated_time_hours" type="measure"/>
+                <field name="total_capacity" type="measure"/>
+                <field name="buffer" type="measure"/>
+            </graph>
+        </field>
+    </record>
+
+    <!-- Action to open the views -->
+    <record id="action_capacity_planning" model="ir.actions.act_window">
+        <field name="name">Capacity Planning</field>
+        <field name="res_model">capacity.planning</field>
+        <field name="view_mode">tree,graph</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                No capacity data found for today.
+            </p>
+        </field>
+    </record>
+
+    <!-- Menu item -->
+    <menuitem id="menu_capacity_planning"
+              name="Current Capacity"
+              parent="menu_widget_configuration_root"
+              action="action_capacity_planning"
+              sequence="1"/>
+</odoo>

@@ -7,4 +7,5 @@ from . import work_center_production
 from . import stepwise_production_flow_tracker
 from . import work_center_wastage
 from . import machine_status_view
+from . import capacity_planning
 
