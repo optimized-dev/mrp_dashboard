@@ -40,6 +40,7 @@
         'report/work_center_wastage_views.xml',
         'report/machine_status_views.xml',
         'report/capacity_planning_views.xml',
+        'report/compulsory_tools_equipment_plan_views.xml',
     ],
     # 'assets': {
     #     'web.assets_backend': [

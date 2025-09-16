@@ -1,0 +1,57 @@
+<odoo>
+    <!-- Tree (List) View -->
+    <record id="view_compulsory_tools_equipment_tree" model="ir.ui.view">
+        <field name="name">compulsory.tools.equipment.plan.tree</field>
+        <field name="model">compulsory.tools.equipment.plan</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="planning_date"/>
+                <field name="tool"/>
+                <field name="production_stage_id"/>
+                <field name="product_name"/>
+                <field name="current_stock"/>
+                <field name="total_required_qty"/>
+                <field name="gap"/>
+                <field name="availability"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Graph View -->
+    <record id="view_compulsory_tools_equipment_graph" model="ir.ui.view">
+        <field name="name">compulsory.tools.equipment.plan.graph</field>
+        <field name="model">compulsory.tools.equipment.plan</field>
+        <field name="arch" type="xml">
+            <graph string="Stock vs Requirement" type="bar">
+                <field name="planning_date" type="row"/>
+                <field name="current_stock" type="measure"/>
+                <field name="total_required_qty" type="measure"/>
+            </graph>
+        </field>
+    </record>
+
+    <!-- Calendar View -->
+    <record id="view_compulsory_tools_equipment_calendar" model="ir.ui.view">
+        <field name="name">compulsory.tools.equipment.plan.calendar</field>
+        <field name="model">compulsory.tools.equipment.plan</field>
+        <field name="arch" type="xml">
+            <calendar string="Tools and Equipment Plan" date_start="planning_date">
+                <field name="tool"/>
+                <field name="availability"/>
+            </calendar>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="action_compulsory_tools_equipment_plan" model="ir.actions.act_window">
+        <field name="name">Compulsory Tools and Equipment Plan</field>
+        <field name="res_model">compulsory.tools.equipment.plan</field>
+        <field name="view_mode">tree,graph,calendar</field>
+    </record>
+
+    <!-- Menu Item -->
+    <menuitem id="menu_compulsory_tools_equipment_plan"
+              name="Compulsory Tools and Equipment Plan"
+              parent="menu_widget_configuration_root"
+              action="action_compulsory_tools_equipment_plan"/>
+</odoo>

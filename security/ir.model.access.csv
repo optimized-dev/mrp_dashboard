@@ -10,3 +10,4 @@ access_stepwise_production_flow_tracker,access_stepwise_production_flow_tracker,
 access_work_centre_wastage,access_work_centre_wastage,model_work_centre_wastage,,1,1,1,1
 access_machine_status_view,access_machine_status_view,model_machine_status_view,,1,1,1,1
 access_capacity_planning,access_capacity_planning,model_capacity_planning,,1,1,1,1
+access_compulsory_tools_equipment_plan,access_compulsory_tools_equipment_plan,model_compulsory_tools_equipment_plan,,1,1,1,1
