@@ -35,6 +35,6 @@
 
     <menuitem id="menu_work_centre_wastage_root"
               name="Work Centre Wastage"
-              parent="menu_widget_configuration_root"
+              parent="menu_operation_section"
               action="action_work_centre_wastage"/>
 </odoo>

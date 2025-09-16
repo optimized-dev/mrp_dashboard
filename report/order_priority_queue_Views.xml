@@ -23,7 +23,7 @@
 
     <menuitem id="menu_order_priority_queue"
               name="Order Priority Queue"
-              parent="menu_widget_configuration_root"
+              parent="menu_planning_section"
               action="action_order_priority_queue" sequence="0"/>
 
 </odoo>

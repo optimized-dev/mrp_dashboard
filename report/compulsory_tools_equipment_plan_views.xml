@@ -52,6 +52,6 @@
     <!-- Menu Item -->
     <menuitem id="menu_compulsory_tools_equipment_plan"
               name="Compulsory Tools and Equipment Plan"
-              parent="menu_widget_configuration_root"
+              parent="menu_planning_section"
               action="action_compulsory_tools_equipment_plan"/>
 </odoo>

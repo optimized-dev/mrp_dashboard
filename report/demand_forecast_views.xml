@@ -39,7 +39,7 @@
 
     <menuitem id="menu_demand_forecast"
               name="Demand Forecast"
-              parent="menu_widget_configuration_root"
+              parent="menu_planning_section"
               action="action_demand_forecast"
               sequence="50"/>
 </odoo>

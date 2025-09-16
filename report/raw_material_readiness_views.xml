@@ -40,7 +40,7 @@
 
     <menuitem id="menu_raw_material_readiness"
               name="Raw Material Readiness"
-              parent="menu_widget_configuration_root"
+              parent="menu_planning_section"
               action="action_raw_material_readiness"
               sequence="50"/>
 </odoo>

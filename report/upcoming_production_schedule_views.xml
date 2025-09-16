@@ -40,7 +40,7 @@
 
     <menuitem id="menu_upcoming_production_schedule"
               name="Upcoming Production Schedule"
-              parent="menu_widget_configuration_root"
+              parent="menu_planning_section"
               action="action_upcoming_production_schedule"
               sequence="50"/>
 </odoo>

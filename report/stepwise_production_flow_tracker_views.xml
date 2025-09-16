@@ -20,7 +20,7 @@
 
     <menuitem id="menu_stepwise_production_flow_tracker"
               name="Stepwise Tracker"
-              parent="menu_widget_configuration_root"
+              parent="menu_operation_section"
               action="action_stepwise_production_flow_tracker"/>
 
 </odoo>

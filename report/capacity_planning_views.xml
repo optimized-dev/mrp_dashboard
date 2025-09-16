@@ -44,7 +44,7 @@
     <!-- Menu item -->
     <menuitem id="menu_capacity_planning"
               name="Current Capacity"
-              parent="menu_widget_configuration_root"
+              parent="menu_planning_section"
               action="action_capacity_planning"
               sequence="1"/>
 </odoo>

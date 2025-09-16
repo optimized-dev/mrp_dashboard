@@ -45,5 +45,5 @@
     <menuitem id="menu_work_centre_production_root"
               name="Work Centre Production"
               action="action_work_centre_production"
-              parent="menu_widget_configuration_root"/>
+              parent="menu_operation_section"/>
 </odoo>

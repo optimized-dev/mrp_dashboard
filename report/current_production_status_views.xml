@@ -52,7 +52,7 @@
     </record>
     <menuitem id="menu_mrp_planning_progress_root"
               name="Planning Progress"
-              parent="menu_widget_configuration_root"
+              parent="menu_operation_section"
               action="action_mrp_planning_progress"
               sequence="50"/>
 
