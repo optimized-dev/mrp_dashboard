@@ -9,8 +9,8 @@ class DemandForecast(models.Model):
     mrp_date = fields.Date(string="MRP Date")
     product_tmpl_id = fields.Many2one('product.template', string='Product Template')
     product_name = fields.Char(string='Product Name')
-    sales_qty = fields.Float(string='Sales Qty')
-    mrp_planned_qty = fields.Float(string='MRP Planned Qty')
+    sales_qty = fields.Float(string='Forecasted Demand')
+    mrp_planned_qty = fields.Float(string='Planned Production')
 
     def init(self):
         tools.drop_view_if_exists(self._cr, self._table)

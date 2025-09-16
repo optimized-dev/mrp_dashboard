@@ -9,7 +9,7 @@ class UpcomingProductionSchedule(models.Model):
     _order = 'date asc'
 
     date = fields.Date(string="Date", readonly=True)
-    product_id = fields.Many2one('product.template', string="Product", readonly=True)  # ✅ keep template
+    product_id = fields.Many2one('product.template', string="Product Name", readonly=True)
     product_code = fields.Char(string="Product Code", readonly=True)
     planned_qty = fields.Float(string="Planned Qty", readonly=True)
     setting_name = fields.Char(string="Horizon", readonly=True)

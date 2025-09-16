@@ -10,7 +10,7 @@
                 <field name="delivery_due_date"/>
                 <field name="priority"/>
                 <field name="customer"/>
-                <field name="profitability_score"/>
+                <field name="profitability_score" invisible="1"/>
             </tree>
         </field>
     </record>

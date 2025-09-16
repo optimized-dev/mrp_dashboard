@@ -20,11 +20,11 @@ class RawMaterialReadiness(models.Model):
     )
     priority = fields.Selection(
         [
-            ('high', '🔴 High'),
-            ('medium', '🟠 Medium'),
-            ('low', '🟢 Low')
+            ('high', '🔴 Critical'),
+            ('medium', '🟡 Warning'),
+            ('low', '🟢 On Hand')
         ],
-        string="Priority",
+        string="Stock Status",
         compute="_compute_forecast",
         store=False,
         readonly=True
@@ -42,7 +42,7 @@ class RawMaterialReadiness(models.Model):
         min_date = min(self.mapped('date'))
         max_date = max(self.mapped('date'))
 
-        # Plans (Production requirements)
+        # Production plans
         all_plans = self.env['mrp.planning'].search([
             ('planning_date', '>=', min_date),
             ('planning_date', '<=', max_date)
@@ -69,10 +69,7 @@ class RawMaterialReadiness(models.Model):
             current_stock = product.qty_available
 
             for rec in product_records:
-                # Requirements from production plan
                 required_qty = sum(plans_map.get((product.id, rec.date), []))
-
-                # Incoming PO qty
                 lines = purchase_map.get((product.id, rec.date), [])
                 total_po_qty = sum(l.product_qty - l.qty_received for l in lines)
 
@@ -80,11 +77,12 @@ class RawMaterialReadiness(models.Model):
                 current_stock = current_stock + total_po_qty - required_qty
                 rec.forecast_stock = current_stock
 
-                # --- Priority assignment ---
                 if current_stock < 0:
-                    rec.priority = 'high'
+                    rec.priority = 'high'  # 🔴 Critical
+                elif current_stock < required_qty:
+                    rec.priority = 'medium'  # 🟡 Warning
                 else:
-                    rec.priority = 'low'
+                    rec.priority = 'low'  # 🟢 On Hand
 
     def init(self):
         tools.drop_view_if_exists(self._cr, 'raw_material_readiness')

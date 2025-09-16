@@ -1,5 +1,6 @@
 from odoo import fields, models, tools
 
+
 class CapacityPlanning(models.Model):
     _name = 'capacity.planning'
     _description = 'Capacity Planning'
@@ -7,9 +8,9 @@ class CapacityPlanning(models.Model):
 
     id = fields.Integer(string='ID', readonly=True)
     resources = fields.Char(string='Resource')
-    allocated_time_hours = fields.Char(string='Allocated Time')
+    allocated_time_hours = fields.Char(string='Allocated')
     total_capacity = fields.Char(string='Total Capacity')
-    used_percent = fields.Char(string='Used %')
+    used_percent = fields.Char(string='% Used')
     buffer = fields.Char(string='Buffer')
 
     def init(self):
@@ -28,9 +29,11 @@ class CapacityPlanning(models.Model):
                     'Machines' AS resources,
                     ROUND(CAST(COALESCE(SUM(pdps.machine_rate), 0) / 60.0 AS numeric)) || ' Hour' AS allocated_time_hours,
                     ROUND(CAST(COALESCE(SUM(csl.machine_rate), 0) / 60.0 AS numeric)) || ' Hour' AS total_capacity,
-                    ROUND(
-                        (CAST(COALESCE(SUM(pdps.machine_rate), 0) / 60.0 AS numeric) /
-                         NULLIF(CAST(COALESCE(SUM(csl.machine_rate), 0) / 60.0 AS numeric), 0)) * 100
+                    COALESCE(
+                        ROUND(
+                            (CAST(COALESCE(SUM(pdps.machine_rate), 0) / 60.0 AS numeric) /
+                             NULLIF(CAST(COALESCE(SUM(csl.machine_rate), 0) / 60.0 AS numeric), 0)) * 100
+                        ), 0
                     ) || ' %' AS used_percent,
                     ROUND(
                         (CAST(COALESCE(SUM(csl.machine_rate), 0) / 60.0 AS numeric) - 
@@ -42,16 +45,16 @@ class CapacityPlanning(models.Model):
                 JOIN capacity_stage_line csl 
                     ON csl.stage_id = pdps.production_stage_id 
                 WHERE mp.planning_date = CURRENT_DATE
-
                 UNION ALL
-
                 SELECT 
                     'Labor' AS resources,
                     ROUND(CAST(COALESCE(SUM(bpsldp.labour_rate), 0) / 60.0 AS numeric)) || ' Hour' AS allocated_time_hours,
                     ROUND(CAST(COALESCE(SUM(csl.labor_rate), 0) / 60.0 AS numeric)) || ' Hour' AS total_capacity,
-                    ROUND(
-                        (CAST(COALESCE(SUM(bpsldp.labour_rate), 0) / 60.0 AS numeric) /
-                         NULLIF(CAST(COALESCE(SUM(csl.labor_rate), 0) / 60.0 AS numeric), 0)) * 100
+                    COALESCE(
+                        ROUND(
+                            (CAST(COALESCE(SUM(bpsldp.labour_rate), 0) / 60.0 AS numeric) /
+                             NULLIF(CAST(COALESCE(SUM(csl.labor_rate), 0) / 60.0 AS numeric), 0)) * 100
+                        ), 0
                     ) || ' %' AS used_percent,
                     ROUND(
                         (CAST(COALESCE(SUM(csl.labor_rate), 0) / 60.0 AS numeric) - 
@@ -65,5 +68,5 @@ class CapacityPlanning(models.Model):
                 JOIN capacity_stage_line csl 
                     ON csl.stage_id = pdps.production_stage_id 
                 WHERE mp.planning_date = CURRENT_DATE
-            ) AS subquery;
+            ) AS subquery
         """)

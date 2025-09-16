@@ -10,9 +10,9 @@ class OrderPriorityQueue(models.Model):
     order_qty = fields.Float("Order Qty")
     delivery_due_date = fields.Datetime("Delivery Due Date")
     priority = fields.Selection([
-        ('Low', 'Low'),
-        ('Medium', 'Medium'),
-        ('High', 'High')
+        ('high', '🔴 High'),
+        ('medium', '🟠 Medium'),
+        ('low', '🟢 Low')
     ], string="Priority", readonly=True)
     customer = fields.Char("Customer")
     profitability_score = fields.Float("Profitability Score")
@@ -28,9 +28,9 @@ class OrderPriorityQueue(models.Model):
                     sol.product_uom_qty AS order_qty,
                     so.commitment_date AS delivery_due_date,
                     CASE
-                        WHEN so.commitment_date <= CURRENT_DATE + INTERVAL '2 day' THEN 'High'
-                        WHEN so.commitment_date <= CURRENT_DATE + INTERVAL '7 day' THEN 'Medium'
-                        ELSE 'Low'
+                        WHEN so.commitment_date <= CURRENT_DATE + INTERVAL '2 day' THEN 'high'
+                        WHEN so.commitment_date <= CURRENT_DATE + INTERVAL '7 day' THEN 'medium'
+                        ELSE 'low'
                     END AS priority,
                     rp.name AS customer,
                     (sol.price_total - (sol.price_unit * sol.product_uom_qty)) AS profitability_score
