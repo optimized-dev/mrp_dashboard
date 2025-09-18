@@ -9,4 +9,6 @@ from . import work_center_wastage
 from . import machine_status_view
 from . import capacity_planning
 from . import compulsory_tools_equipment_plan
+from . import production_volume_trends
+from . import machine_utilization_report
 

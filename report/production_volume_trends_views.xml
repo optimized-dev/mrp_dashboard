@@ -1,0 +1,38 @@
+<odoo>
+    <record id="view_production_volume_trends_tree" model="ir.ui.view">
+        <field name="name">production.volume.trends.tree</field>
+        <field name="model">production.volume.trends</field>
+        <field name="arch" type="xml">
+            <tree string="Production Volume Trends">
+                <field name="date"/>
+                <field name="product_id"/>
+                <field name="production_stage_id"/>
+                <field name="planned_qty"/>
+                <field name="actual_qty"/>
+                <field name="deviation_units"/>
+                <field name="deviation_percentage"/>
+                <field name="plan_adherence_percentage"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Action to open the tree view -->
+    <record id="action_production_volume_trends" model="ir.actions.act_window">
+        <field name="name">Production Volume Trends</field>
+        <field name="res_model">production.volume.trends</field>
+        <field name="view_mode">tree,graph</field>
+        <field name="view_id" ref="view_production_volume_trends_tree"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                No production data found.
+            </p>
+        </field>
+    </record>
+
+    <!-- Menu item to access the report -->
+    <menuitem id="menu_production_volume_trends"
+              name="Production Volume Trends"
+              parent="menu_analysis_section"
+              action="action_production_volume_trends"
+              sequence="20"/>
+</odoo>

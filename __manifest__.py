@@ -41,6 +41,8 @@
         'report/machine_status_views.xml',
         'report/capacity_planning_views.xml',
         'report/compulsory_tools_equipment_plan_views.xml',
+        'report/production_volume_trends_views.xml',
+        'report/machine_utilization_report_views.xml',
     ],
     # 'assets': {
     #     'web.assets_backend': [

@@ -1,0 +1,42 @@
+<odoo>
+    <!-- Tree/List View -->
+    <record id="view_machine_utilization_tree" model="ir.ui.view">
+        <field name="name">machine.utilization.report.tree</field>
+        <field name="model">machine.utilization.report</field>
+        <field name="arch" type="xml">
+            <tree string="Machine Utilization Report">
+                <field name="work_centre"/>
+                <field name="machine_id"/>
+                <field name="product_id"/>
+                <field name="planned_runtime_hrs"/>
+                <field name="actual_runtime_hrs"/>
+                <field name="downtime_hrs"/>
+                <field name="downtime_reason"/>
+                <field name="utilization_percent"/>
+                <field name="downtime_percent"/>
+                <field name="mtbf_hrs"/>
+                <field name="mttr_hrs"/>
+                <field name="status"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="action_machine_utilization" model="ir.actions.act_window">
+        <field name="name">Machine Utilization</field>
+        <field name="res_model">machine.utilization.report</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                Machine utilization report for current day.
+            </p>
+        </field>
+    </record>
+
+    <!-- Menu -->
+    <menuitem id="menu_machine_utilization_report"
+              name="Utilization Report"
+              parent="menu_analysis_section"
+              action="action_machine_utilization"
+              sequence="1"/>
+</odoo>

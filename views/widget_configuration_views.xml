@@ -39,6 +39,7 @@
     <menuitem id="menu_widget_configuration_root" name="Widget Configurations" parent="mrp.menu_mrp_configuration"/>
     <menuitem id="menu_planning_section" name="Planning Related Views" parent="mrp.menu_mrp_configuration"/>
     <menuitem id="menu_operation_section" name="Operation Related Views" parent="mrp.menu_mrp_configuration"/>
+    <menuitem id="menu_analysis_section" name="Analysis Related Views" parent="mrp.menu_mrp_configuration"/>
     <menuitem id="menu_widget_configuration"
               name="Configurations"
               parent="menu_widget_configuration_root"
