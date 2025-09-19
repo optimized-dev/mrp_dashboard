@@ -43,6 +43,7 @@
         'report/compulsory_tools_equipment_plan_views.xml',
         'report/production_volume_trends_views.xml',
         'report/machine_utilization_report_views.xml',
+        'report/order_fulfillment_progress_views.xml',
     ],
     # 'assets': {
     #     'web.assets_backend': [
