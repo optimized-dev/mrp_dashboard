@@ -3,12 +3,12 @@ from odoo import models, fields, tools
 class MachineUtilizationReport(models.Model):
     _name = 'machine.utilization.report'
     _description = 'Machine Utilization Report'
-    _auto = False  # Important: this is a SQL view
+    _auto = False  # SQL view
     _order = 'work_centre, machine_id'
 
     work_centre = fields.Char(string="Work Centre")
     machine_id = fields.Many2one('machine.master', string="Machine")
-    product_id = fields.Many2one('product.product', string="Product")
+    product_id = fields.Many2one('product.template', string="Product")
     planned_runtime_hrs = fields.Float(string="Planned Runtime (Hrs)")
     actual_runtime_hrs = fields.Float(string="Actual Runtime (Hrs)")
     downtime_hrs = fields.Float(string="Downtime (Hrs)")
@@ -24,10 +24,10 @@ class MachineUtilizationReport(models.Model):
         self.env.cr.execute("""
             CREATE OR REPLACE VIEW machine_utilization_report AS
 SELECT 
-    row_number() OVER() AS id,  -- << Add this line
+    row_number() OVER() AS id,
     mw.name AS work_centre,
     mm.id AS machine_id,
-    mp.product_id,
+    mp.product_id AS product_id,
     ROUND((pdpps.machine_rate / 60.0)::numeric, 2) AS planned_runtime_hrs,
     ROUND(((pdpps.machine_rate / 60.0 - COALESCE(EXTRACT(EPOCH FROM (mr.engineering_end_last_time - mr.request_date_time)) / 3600, 0))::numeric), 2) AS actual_runtime_hrs,
     ROUND(COALESCE(EXTRACT(EPOCH FROM (mr.engineering_end_last_time - mr.request_date_time)) / 3600, 0)::numeric, 2) AS downtime_hrs,
@@ -56,11 +56,11 @@ SELECT
         WHEN ((pdpps.machine_rate / 60.0) > 0 
               AND (((pdpps.machine_rate / 60.0 - COALESCE(EXTRACT(EPOCH FROM (mr.engineering_end_last_time - mr.request_date_time)) / 3600, 0)) / (pdpps.machine_rate / 60.0)) * 100) >= 85 
               AND ((COALESCE(EXTRACT(EPOCH FROM (mr.engineering_end_last_time - mr.request_date_time)) / 3600, 0) / (pdpps.machine_rate / 60.0)) * 100) < 5) 
-            THEN '✅ Green'
+            THEN '✅ High Utilization'
         WHEN ((pdpps.machine_rate / 60.0) > 0 
               AND (((pdpps.machine_rate / 60.0 - COALESCE(EXTRACT(EPOCH FROM (mr.engineering_end_last_time - mr.request_date_time)) / 3600, 0)) / (pdpps.machine_rate / 60.0)) * 100) BETWEEN 60 AND 85) 
-            THEN '⚠️ Orange'
-        ELSE '❌ Red'
+            THEN '⚠️ Moderate Utilization'
+        ELSE '❌ Low Utilization'
     END AS status
 FROM mrp_planning mp
 JOIN production_daily_plan_process_stages pdpps 
@@ -77,5 +77,4 @@ LEFT JOIN maintenance_request mr
     AND mr.maintenance_type = 'corrective' 
     AND DATE(mr.request_date_time) = mp.planning_date
 WHERE mp.planning_date = CURRENT_DATE;
-
         """)
