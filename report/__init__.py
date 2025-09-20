@@ -12,4 +12,5 @@ from . import compulsory_tools_equipment_plan
 from . import production_volume_trends
 from . import machine_utilization_report
 from . import order_fulfillment_progress
+from . import real_time_production_health
 

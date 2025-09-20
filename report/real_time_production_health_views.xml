@@ -1,0 +1,65 @@
+<odoo>
+    <!-- Tree (List) View -->
+    <record id="view_real_time_production_health_tree" model="ir.ui.view">
+        <field name="name">real.time.production.health.tree</field>
+        <field name="model">real.time.production.health</field>
+        <field name="arch" type="xml">
+            <tree string="Real Time Production Health" create="false" edit="false" delete="false">
+                <field name="machine_id"/>
+                <field name="uptime_min"/>
+                <field name="downtime_min"/>
+                <field name="total_produce"/>
+                <field name="good_units"/>
+                <field name="total_defects"/>
+                <field name="scheduled_min"/>
+                <field name="availability_percent"/>
+                <field name="ideal_cycle_time"/>
+                <field name="performance_percent"/>
+                <field name="quality_percent"/>
+                <field name="oee_percent"/>
+                <field name="health_status"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Form View -->
+    <record id="view_real_time_production_health_form" model="ir.ui.view">
+        <field name="name">real.time.production.health.form</field>
+        <field name="model">real.time.production.health</field>
+        <field name="arch" type="xml">
+            <form string="Real Time Production Health">
+                <sheet>
+                    <group>
+                        <field name="machine_id"/>
+                        <field name="uptime_min"/>
+                        <field name="downtime_min"/>
+                        <field name="total_produce"/>
+                        <field name="good_units"/>
+                        <field name="total_defects"/>
+                        <field name="scheduled_min"/>
+                    </group>
+                    <group>
+                        <field name="availability_percent"/>
+                        <field name="ideal_cycle_time"/>
+                        <field name="performance_percent"/>
+                        <field name="quality_percent"/>
+                        <field name="oee_percent"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="action_real_time_production_health" model="ir.actions.act_window">
+        <field name="name">Production Health</field>
+        <field name="res_model">real.time.production.health</field>
+        <field name="view_mode">tree</field>
+    </record>
+
+    <!-- Menu Item -->
+    <menuitem id="menu_real_time_production_health_root"
+              name="Production Health"
+              parent="menu_operation_section"
+              action="action_real_time_production_health"/>
+</odoo>
