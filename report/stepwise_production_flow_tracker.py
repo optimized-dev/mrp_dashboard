@@ -25,5 +25,6 @@ class StepwiseProductionFlowTracker(models.Model):
                 FROM production_daily_operation pdo
                 JOIN production_stage ps 
                   ON pdo.production_stage_id = ps.id
+                                  join mrp_planning mp on mp.id = pdo.production_plan_id where mp.planning_date = current_date
             )
         """ % self._table)

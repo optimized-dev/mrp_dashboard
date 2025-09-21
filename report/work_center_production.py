@@ -32,4 +32,5 @@ class WorkCentreProduction(models.Model):
                 ON pdoto.id = tod.production_daily_operation_transfer_out_id
             JOIN production_daily_operation pdo
                 ON pdo.id = pdoto.production_daily_operation_id
+            join mrp_planning mp on mp.id = pdo.production_plan_id where mp.planning_date = current_date
         """)

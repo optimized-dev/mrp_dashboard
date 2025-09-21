@@ -32,5 +32,6 @@ class WorkCentreWastage(models.Model):
                 ON pdow.id = wd.production_daily_operation_wastage_id
             JOIN production_daily_operation pdo
                 ON pdo.id = pdow.production_daily_operation_id
+                                                join mrp_planning mp on mp.id = pdo.production_plan_id where mp.planning_date = current_date
         """)
 
