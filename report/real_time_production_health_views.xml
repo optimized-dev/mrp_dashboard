@@ -4,49 +4,23 @@
         <field name="name">real.time.production.health.tree</field>
         <field name="model">real.time.production.health</field>
         <field name="arch" type="xml">
-            <tree string="Real Time Production Health" create="false" edit="false" delete="false">
-                <field name="machine_id"/>
-                <field name="uptime_min"/>
+            <tree string="Real Time Production Health">
+                <field name="product_id"/>
+                <field name="machine_name"/>
+                <field name="shift_start"/>
+                <field name="shift_end"/>
+                <field name="production_scheduled_time"/>
                 <field name="downtime_min"/>
-                <field name="total_produce"/>
+                <field name="uptime_min"/>
                 <field name="good_units"/>
-                <field name="total_defects"/>
-                <field name="scheduled_min"/>
+                <field name="wastages"/>
+                <field name="total_units"/>
                 <field name="availability_percent"/>
-                <field name="ideal_cycle_time"/>
                 <field name="performance_percent"/>
                 <field name="quality_percent"/>
                 <field name="oee_percent"/>
-                <field name="health_status"/>
+                <field name="quick_view"/>
             </tree>
-        </field>
-    </record>
-
-    <!-- Form View -->
-    <record id="view_real_time_production_health_form" model="ir.ui.view">
-        <field name="name">real.time.production.health.form</field>
-        <field name="model">real.time.production.health</field>
-        <field name="arch" type="xml">
-            <form string="Real Time Production Health">
-                <sheet>
-                    <group>
-                        <field name="machine_id"/>
-                        <field name="uptime_min"/>
-                        <field name="downtime_min"/>
-                        <field name="total_produce"/>
-                        <field name="good_units"/>
-                        <field name="total_defects"/>
-                        <field name="scheduled_min"/>
-                    </group>
-                    <group>
-                        <field name="availability_percent"/>
-                        <field name="ideal_cycle_time"/>
-                        <field name="performance_percent"/>
-                        <field name="quality_percent"/>
-                        <field name="oee_percent"/>
-                    </group>
-                </sheet>
-            </form>
         </field>
     </record>
 
