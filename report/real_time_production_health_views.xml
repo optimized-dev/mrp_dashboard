@@ -33,7 +33,7 @@
 
     <!-- Menu Item -->
     <menuitem id="menu_real_time_production_health_root"
-              name="Production Health"
+              name="Real-Time Production Health Overview"
               parent="menu_operation_section"
               action="action_real_time_production_health"/>
 </odoo>
