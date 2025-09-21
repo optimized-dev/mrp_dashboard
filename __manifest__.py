@@ -45,6 +45,7 @@
         'report/machine_utilization_report_views.xml',
         'report/order_fulfillment_progress_views.xml',
         'report/real_time_production_health_views.xml',
+        'report/shift_performance_summary_views.xml',
     ],
     # 'assets': {
     #     'web.assets_backend': [

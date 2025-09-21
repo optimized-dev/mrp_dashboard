@@ -1,0 +1,37 @@
+<odoo>
+    <record id="view_shift_performance_summary_tree" model="ir.ui.view">
+        <field name="name">shift.performance.summary.tree</field>
+        <field name="model">shift.performance.summary</field>
+        <field name="arch" type="xml">
+            <tree string="Shift Performance Summary">
+<!--                <field name="tod_id"/>-->
+                <field name="shift_type"/>
+                <field name="planned_qty"/>
+                <field name="actual_qty"/>
+                <field name="deviation_percent"/>
+                <field name="shift_start"/>
+                <field name="shift_end"/>
+                <field name="throughput_rate"/>
+                <field name="status"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Optional action to open the tree view -->
+    <record id="action_shift_performance_summary" model="ir.actions.act_window">
+        <field name="name">Shift Performance Summary</field>
+        <field name="res_model">shift.performance.summary</field>
+        <field name="view_mode">tree</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                Here you can see the shift-wise performance summary.
+            </p>
+        </field>
+    </record>
+
+    <!-- Menu item to access the view -->
+    <menuitem id="menu_shift_performance_summary"
+              name="Shift Performance Summary"
+              parent="menu_operation_section"
+              action="action_shift_performance_summary"/>
+</odoo>
