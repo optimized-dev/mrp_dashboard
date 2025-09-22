@@ -1,42 +1,82 @@
 <odoo>
     <!-- Tree/List View -->
-    <record id="view_machine_utilization_tree" model="ir.ui.view">
-        <field name="name">machine.utilization.report.tree</field>
-        <field name="model">machine.utilization.report</field>
-        <field name="arch" type="xml">
-            <tree string="Machine Utilization Report">
-                <field name="work_centre"/>
-                <field name="machine_id"/>
-                <field name="product_id"/>
-                <field name="planned_runtime_hrs"/>
-                <field name="actual_runtime_hrs"/>
-                <field name="downtime_hrs"/>
-                <field name="downtime_reason"/>
-                <field name="utilization_percent"/>
-                <field name="downtime_percent"/>
-                <field name="mtbf_hrs"/>
-                <field name="mttr_hrs"/>
-                <field name="status"/>
-            </tree>
-        </field>
-    </record>
-
-    <!-- Action -->
-    <record id="action_machine_utilization" model="ir.actions.act_window">
-        <field name="name">Machine Utilization</field>
+    <record id="action_machine_utilization_report" model="ir.actions.act_window">
+        <field name="name">Machine Utilization Report</field>
         <field name="res_model">machine.utilization.report</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">tree,graph,pivot</field>
         <field name="help" type="html">
-            <p class="oe_view_nocontent_create">
-                Machine utilization report for current day.
+            <p>
+                Machine utilization with <b>Availability</b>, <b>Performance</b>,
+                <b>Quality</b>, <b>OEE</b> and downtime KPIs.
             </p>
         </field>
     </record>
 
     <!-- Menu -->
+
+
+    <!-- Tree View -->
+    <record id="view_machine_utilization_report_tree" model="ir.ui.view">
+        <field name="name">machine.utilization.report.tree</field>
+        <field name="model">machine.utilization.report</field>
+        <field name="arch" type="xml">
+            <tree string="Machine Utilization Report" create="false" edit="false">
+                <field name="machine_name"/>
+                <field name="shift_start"/>
+                <field name="shift_end"/>
+                <field name="production_scheduled_min"/>
+                <field name="downtime_min"/>
+                <field name="uptime_min"/>
+                <field name="good_units"/>
+                <field name="wastage_units"/>
+                <field name="total_units"/>
+                <field name="availability_percent" widget="percentpie"/>
+                <field name="performance_percent" widget="percentpie"/>
+                <field name="quality_percent" widget="percentpie"/>
+                <field name="oee_percent" widget="percentpie"/>
+                <field name="mtbf_min"/>
+                <field name="quick_view"/>
+                <field name="product_id"/>
+                <field name="planning_date"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Graph View -->
+    <record id="view_machine_utilization_report_graph" model="ir.ui.view">
+        <field name="name">machine.utilization.report.graph</field>
+        <field name="model">machine.utilization.report</field>
+        <field name="arch" type="xml">
+            <graph string="Machine Utilization Analysis" type="bar">
+                <field name="machine_name" type="row"/>
+                <field name="oee_percent" type="measure"/>
+                <field name="availability_percent" type="measure"/>
+                <field name="performance_percent" type="measure"/>
+                <field name="quality_percent" type="measure"/>
+            </graph>
+        </field>
+    </record>
+
+    <!-- Pivot View -->
+    <record id="view_machine_utilization_report_pivot" model="ir.ui.view">
+        <field name="name">machine.utilization.report.pivot</field>
+        <field name="model">machine.utilization.report</field>
+        <field name="arch" type="xml">
+            <pivot string="Machine Utilization Pivot">
+                <field name="machine_name" type="row"/>
+                <field name="product_id" type="col"/>
+                <field name="oee_percent" type="measure"/>
+                <field name="availability_percent" type="measure"/>
+                <field name="performance_percent" type="measure"/>
+                <field name="quality_percent" type="measure"/>
+                <field name="downtime_min" type="measure"/>
+            </pivot>
+        </field>
+    </record>
+    <!-- Menu -->
     <menuitem id="menu_machine_utilization_report"
               name="Utilization Report"
               parent="menu_analysis_section"
-              action="action_machine_utilization"
+              action="action_machine_utilization_report"
               sequence="1"/>
 </odoo>
