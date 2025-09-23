@@ -14,4 +14,5 @@ from . import machine_utilization_report
 from . import order_fulfillment_progress
 from . import real_time_production_health
 from . import shift_performance_summary
+from . import quality_reject_history
 

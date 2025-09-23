@@ -46,6 +46,7 @@
         'report/order_fulfillment_progress_views.xml',
         'report/real_time_production_health_views.xml',
         'report/shift_performance_summary_views.xml',
+        'report/quality_reject_history_views.xml',
     ],
     # 'assets': {
     #     'web.assets_backend': [

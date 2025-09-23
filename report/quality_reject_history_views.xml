@@ -1,0 +1,40 @@
+<odoo>
+    <!-- Tree/List View -->
+    <record id="view_quality_reject_history_tree" model="ir.ui.view">
+        <field name="name">quality.reject.history.tree</field>
+        <field name="model">quality.reject.history</field>
+        <field name="arch" type="xml">
+            <tree string="Quality Reject History" create="false" delete="false" edit="false">
+                <field name="date"/>
+                <field name="product_id"/>
+                <field name="total_produce"/>
+                <field name="rejected_units"/>
+                <field name="rejection_percentage"/>
+                <field name="damage_type_id"/>
+                <field name="severity"/>
+                <field name="fpy"/>
+                <field name="workcenter_id"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="action_quality_reject_history" model="ir.actions.act_window">
+        <field name="name">Quality Reject History</field>
+        <field name="res_model">quality.reject.history</field>
+        <field name="view_mode">tree</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                No data available for Quality Reject History
+            </p>
+        </field>
+    </record>
+
+    <!-- Menu Item -->
+
+    <menuitem id="menu_quality_reject_history"
+              name="Reject History"
+              parent="menu_analysis_section"
+              action="action_quality_reject_history"
+              sequence="20"/>
+</odoo>
