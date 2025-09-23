@@ -47,6 +47,7 @@
         'report/real_time_production_health_views.xml',
         'report/shift_performance_summary_views.xml',
         'report/quality_reject_history_views.xml',
+        'report/order_fulfilment_lead_time_history_Views.xml',
     ],
     # 'assets': {
     #     'web.assets_backend': [

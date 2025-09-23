@@ -15,4 +15,5 @@ from . import order_fulfillment_progress
 from . import real_time_production_health
 from . import shift_performance_summary
 from . import quality_reject_history
+from . import order_fulfillment_lead_time_history
 

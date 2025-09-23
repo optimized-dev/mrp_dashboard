@@ -1,0 +1,39 @@
+<odoo>
+    <!-- Tree View -->
+    <record id="view_order_fulfillment_lead_time_history_tree" model="ir.ui.view">
+        <field name="name">order.fulfillment.lead.time.history.tree</field>
+        <field name="model">order.fulfillment.lead.time.history</field>
+        <field name="arch" type="xml">
+            <tree string="Order Fulfillment Lead Time History">
+                <field name="order_name"/>
+                <field name="partner_id"/>
+                <field name="product_id"/>
+                <field name="order_creation"/>
+                <field name="promised_ship_date"/>
+                <field name="actual_ship_date"/>
+                <field name="e2e_lt"/>
+                <field name="delay_days"/>
+                <field name="on_time_flag"/>
+                <field name="backlog_aging"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="action_order_fulfillment_lead_time_history" model="ir.actions.act_window">
+        <field name="name">Order Fulfillment Lead Time History</field>
+        <field name="res_model">order.fulfillment.lead.time.history</field>
+        <field name="view_mode">tree</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                No records found.
+            </p>
+        </field>
+    </record>
+
+    <!-- Menu Item -->
+    <menuitem id="menu_order_fulfillment_lead_time_history"
+              name="Order Fulfilment and Lead Time History "
+              parent="menu_analysis_section"
+              action="action_order_fulfillment_lead_time_history"/>
+</odoo>
