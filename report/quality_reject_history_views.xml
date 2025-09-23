@@ -33,7 +33,7 @@
     <!-- Menu Item -->
 
     <menuitem id="menu_quality_reject_history"
-              name="Reject History"
+              name="Quality and Rejections History "
               parent="menu_analysis_section"
               action="action_quality_reject_history"
               sequence="20"/>
