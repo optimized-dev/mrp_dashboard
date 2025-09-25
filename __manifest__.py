@@ -22,7 +22,7 @@
     'website': "https:www.optimized.lk",
     'maintainer': 'Avishka Deshan',
     'category': 'Inventory',
-    'depends': ['mrp', 'manufacturing_extend', 'dynamic_manufacturing_extend'],
+    'depends': ['mrp', 'manufacturing_extend', 'dynamic_manufacturing_extend', 'product'],
 
     'data': [
         'security/ir.model.access.csv',
@@ -48,6 +48,8 @@
         'report/shift_performance_summary_views.xml',
         'report/quality_reject_history_views.xml',
         'report/order_fulfilment_lead_time_history_Views.xml',
+        'report/cost_resource_consumption_views.xml',
+        'views/product_views.xml',
     ],
     # 'assets': {
     #     'web.assets_backend': [

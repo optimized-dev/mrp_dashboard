@@ -1,0 +1,33 @@
+<odoo>
+    <record id="view_cost_resource_consumption_tree" model="ir.ui.view">
+        <field name="name">cost.resource.consumption.tree</field>
+        <field name="model">cost.resource.consumption</field>
+        <field name="arch" type="xml">
+            <tree string="Cost Resource Consumption">
+                <field name="date"/>
+                <field name="product_name"/>
+                <field name="planned_qty"/>
+                <field name="actual_qty"/>
+                <field name="total_production_cost"/>
+                <field name="cost_per_unit"/>
+                <field name="material_planned_usage"/>
+                <field name="material_actual_usage"/>
+                <field name="variance"/>
+                <field name="utility_name"/>
+                <field name="energy_per_unit_output"/>
+                <field name="material_cost"/>
+                <field name="labour_cost"/>
+                <field name="overhead_cost"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_cost_resource_consumption" model="ir.actions.act_window">
+        <field name="name">Cost Resource Consumption</field>
+        <field name="res_model">cost.resource.consumption</field>
+        <field name="view_mode">tree</field>
+    </record>
+
+    <menuitem id="menu_cost_resource_consumption" name="Cost Resource Consumption"
+              parent="menu_analysis_section" action="action_cost_resource_consumption"/>
+</odoo>
