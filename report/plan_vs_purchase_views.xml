@@ -1,0 +1,31 @@
+<odoo>
+    <record id="view_plan_vs_purchase_tree" model="ir.ui.view">
+        <field name="name">plan.vs.purchase.tree</field>
+        <field name="model">plan.vs.purchase</field>
+        <field name="arch" type="xml">
+            <tree string="Production Plan vs Import Purchase Plan">
+                <field name="planning_date"/>
+                <field name="product_id"/>
+                <field name="product_name"/>
+                <field name="required_qty" sum="Total Required"/>
+                <field name="purchased_qty" sum="Total Purchased"/>
+                <field name="remaining_stock" sum="Total Stock"/>
+                <field name="gap_qty" sum="Total Gap"/>
+                <field name="alert_status"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_plan_vs_purchase" model="ir.actions.act_window">
+        <field name="name">Plan vs Purchase</field>
+        <field name="res_model">plan.vs.purchase</field>
+        <field name="view_mode">tree</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                This view shows Production Plan vs Import Purchase Plan with stock status.
+            </p>
+        </field>
+    </record>
+
+    <menuitem id="menu_plan_vs_purchase" name="Plan vs Purchase" parent="menu_planning_section" action="action_plan_vs_purchase"/>
+</odoo>
