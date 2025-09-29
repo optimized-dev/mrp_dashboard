@@ -18,4 +18,6 @@ from . import quality_reject_history
 from . import order_fulfillment_lead_time_history
 from . import cost_resource_consumption
 from . import plan_vs_purchase
+from . import wastage_plan
+from . import recovery_ratio
 

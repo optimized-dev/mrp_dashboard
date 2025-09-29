@@ -1,0 +1,27 @@
+<odoo>
+    <record id="view_recovery_ratio_tree" model="ir.ui.view">
+        <field name="name">recovery.ratio.tree</field>
+        <field name="model">recovery.ratio</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="planning_date"/>
+                <field name="product_uom_qty"/>
+                <field name="actual_qty"/>
+                <field name="recovery_ratio" widget="percentpie"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="action_recovery_ratio" model="ir.actions.act_window">
+        <field name="name">Recovery Ratio</field>
+        <field name="res_model">recovery.ratio</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="menu_recovery_ratio" name="Recovery Ratio"
+              parent="menu_planning_section"
+              action="action_recovery_ratio"/>
+
+
+</odoo>

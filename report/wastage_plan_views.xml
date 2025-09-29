@@ -1,0 +1,26 @@
+<odoo>
+    <record id="view_wastage_plan_tree" model="ir.ui.view">
+        <field name="name">wastage.plan.tree</field>
+        <field name="model">wastage.plan</field>
+        <field name="arch" type="xml">
+            <tree string="Wastage Plan">
+                <field name="planning_date"/>
+                <field name="standard_qty"/>
+                <field name="actual_qty"/>
+                <field name="wastage_percent" widget="percentpie"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_wastage_plan" model="ir.actions.act_window">
+        <field name="name">Wastage Plan</field>
+        <field name="res_model">wastage.plan</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="menu_wastage_plan"
+              name="Wastage Plan"
+              parent="menu_planning_section"
+              action="action_wastage_plan"
+              sequence="20"/>
+</odoo>

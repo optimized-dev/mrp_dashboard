@@ -20,4 +20,6 @@ access_quality_reject_history,access_quality_reject_history,model_quality_reject
 access_order_fulfillment_lead_time_history,access_fulfillment_lead_time_history,model_order_fulfillment_lead_time_history,,1,1,1,1
 access_cost_resource_consumption,access_cost_resource_consumption,model_cost_resource_consumption,,1,1,1,1
 access_plan_vs_purchase,access_plan_vs_purchase,model_plan_vs_purchase,,1,1,1,1
+access_wastage_plan,access_wastage_plan,model_wastage_plan,,1,1,1,1
+access_recovery_ratio,access_recovery_ratio,model_recovery_ratio,,1,1,1,1
 

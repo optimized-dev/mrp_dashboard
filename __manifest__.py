@@ -51,6 +51,8 @@
         'report/cost_resource_consumption_views.xml',
         'views/product_views.xml',
         'report/plan_vs_purchase_views.xml',
+        'report/wastage_plan_views.xml',
+        'report/recovery_ratio_views.xml',
     ],
     # 'assets': {
     #     'web.assets_backend': [
