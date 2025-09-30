@@ -26,6 +26,7 @@
                 <field name="shift_end"/>
                 <field name="production_scheduled_min"/>
                 <field name="downtime_min"/>
+                <field name="downtime_reason"/>
                 <field name="downtime_percent"/>
                 <field name="uptime_min"/>
                 <field name="good_units"/>

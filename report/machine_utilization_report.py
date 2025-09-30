@@ -13,6 +13,7 @@ class MachineUtilizationReport(models.Model):
     planning_date = fields.Date(string='Date')
     production_scheduled_min = fields.Float(string='Scheduled Time (min)')
     downtime_min = fields.Float(string='Downtime (min)')
+    downtime_reason = fields.Char(string='Downtime Reason')
     downtime_percent = fields.Float(string='Downtime%')
     uptime_min = fields.Float(string='Uptime (min)')
     good_units = fields.Float(string='Good Units')
@@ -134,6 +135,7 @@ class MachineUtilizationReport(models.Model):
                             )
                             ELSE NULL
                         END AS mttr_min,
+                        mr.remark AS downtime_reason,
                         CASE
                             WHEN ROUND(
                                 (
