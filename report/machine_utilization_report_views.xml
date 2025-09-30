@@ -26,6 +26,7 @@
                 <field name="shift_end"/>
                 <field name="production_scheduled_min"/>
                 <field name="downtime_min"/>
+                <field name="downtime_percent"/>
                 <field name="uptime_min"/>
                 <field name="good_units"/>
                 <field name="wastage_units"/>
@@ -35,6 +36,7 @@
                 <field name="quality_percent" widget="percentpie"/>
                 <field name="oee_percent" widget="percentpie"/>
                 <field name="mtbf_min"/>
+                <field name="mttr_min"/>
                 <field name="quick_view"/>
                 <field name="product_id"/>
                 <field name="planning_date"/>
