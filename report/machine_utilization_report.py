@@ -6,7 +6,6 @@ class MachineUtilizationReport(models.Model):
     _auto = False
     _order = 'machine_id'
 
-    # Fields
     machine_id = fields.Many2one('machine.master', string='Machine')
     machine_name = fields.Char(string='Machine Name')
     shift_start = fields.Datetime(string='Shift Start')
@@ -23,7 +22,7 @@ class MachineUtilizationReport(models.Model):
     performance_percent = fields.Float(string='Performance')
     quality_percent = fields.Float(string='Quality')
     oee_percent = fields.Float(string='OEE')
-    oee_moving_avg = fields.Float(string='OEE Moving Avg')  # New field
+    oee_moving_avg = fields.Float(string='OEE Moving Avg')
     mtbf_min = fields.Float(string='MTBF (min)')
     mttr_min = fields.Float(string='MTTR (min)')
     quick_view = fields.Char(string='Quick View')
@@ -135,6 +134,51 @@ class MachineUtilizationReport(models.Model):
                             )
                             ELSE NULL
                         END AS mttr_min,
+                        CASE
+                            WHEN ROUND(
+                                (
+                                    (CASE 
+                                        WHEN (EXTRACT(EPOCH FROM (mp.production_end - mp.production_start)) / 60) > 0
+                                        THEN (((EXTRACT(EPOCH FROM (mp.production_end - mp.production_start)) / 60)::numeric - COALESCE((EXTRACT(EPOCH FROM (mr.engineering_end_last_time - mr.request_date_time)) / 60)::numeric, 0)) / (EXTRACT(EPOCH FROM (mp.production_end - mp.production_start)) / 60)::numeric * 100)
+                                        ELSE 0
+                                    END)
+                                    *
+                                    (CASE
+                                        WHEN ((EXTRACT(EPOCH FROM (mp.production_end - mp.production_start)) / 60)::numeric - COALESCE((EXTRACT(EPOCH FROM (mr.engineering_end_last_time - mr.request_date_time)) / 60)::numeric, 0)) * 60 > 0
+                                        THEN ((1 * (COALESCE(mp.actual_qty, 0) + COALESCE(pdo.total_wastage + pdo.total_damages, 0)))::numeric / (((EXTRACT(EPOCH FROM (mp.production_end - mp.production_start)) / 60)::numeric - COALESCE((EXTRACT(EPOCH FROM (mr.engineering_end_last_time - mr.request_date_time)) / 60)::numeric, 0)) * 60) * 100)
+                                        ELSE 0
+                                    END)
+                                    *
+                                    (CASE
+                                        WHEN (COALESCE(mp.actual_qty, 0) + COALESCE(pdo.total_wastage + pdo.total_damages, 0)) > 0
+                                        THEN (COALESCE(mp.actual_qty, 0)::numeric / (COALESCE(mp.actual_qty, 0) + COALESCE(pdo.total_wastage + pdo.total_damages, 0))::numeric * 100)
+                                        ELSE 0
+                                    END)
+                                )::numeric / 10000, 2
+                            ) >= 85 THEN '🟢 Healthy'
+                            WHEN ROUND(
+                                (
+                                    (CASE 
+                                        WHEN (EXTRACT(EPOCH FROM (mp.production_end - mp.production_start)) / 60) > 0
+                                        THEN (((EXTRACT(EPOCH FROM (mp.production_end - mp.production_start)) / 60)::numeric - COALESCE((EXTRACT(EPOCH FROM (mr.engineering_end_last_time - mr.request_date_time)) / 60)::numeric, 0)) / (EXTRACT(EPOCH FROM (mp.production_end - mp.production_start)) / 60)::numeric * 100)
+                                        ELSE 0
+                                    END)
+                                    *
+                                    (CASE
+                                        WHEN ((EXTRACT(EPOCH FROM (mp.production_end - mp.production_start)) / 60)::numeric - COALESCE((EXTRACT(EPOCH FROM (mr.engineering_end_last_time - mr.request_date_time)) / 60)::numeric, 0)) * 60 > 0
+                                        THEN ((1 * (COALESCE(mp.actual_qty, 0) + COALESCE(pdo.total_wastage + pdo.total_damages, 0)))::numeric / (((EXTRACT(EPOCH FROM (mp.production_end - mp.production_start)) / 60)::numeric - COALESCE((EXTRACT(EPOCH FROM (mr.engineering_end_last_time - mr.request_date_time)) / 60)::numeric, 0)) * 60) * 100)
+                                        ELSE 0
+                                    END)
+                                    *
+                                    (CASE
+                                        WHEN (COALESCE(mp.actual_qty, 0) + COALESCE(pdo.total_wastage + pdo.total_damages, 0)) > 0
+                                        THEN (COALESCE(mp.actual_qty, 0)::numeric / (COALESCE(mp.actual_qty, 0) + COALESCE(pdo.total_wastage + pdo.total_damages, 0))::numeric * 100)
+                                        ELSE 0
+                                    END)
+                                )::numeric / 10000, 2
+                            ) BETWEEN 65 AND 84 THEN '🟠 At Risk'
+                            ELSE '🔴 Critical'
+                        END AS quick_view,
                         mp.product_id
                     FROM mrp_planning mp
                     JOIN production_daily_plan_process_stages pdpps ON pdpps.daily_production_plan_id = mp.id
