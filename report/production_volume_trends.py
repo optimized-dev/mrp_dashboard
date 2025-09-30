@@ -1,5 +1,6 @@
 from odoo import models, fields, tools
 
+
 class ProductionVolumeTrends(models.Model):
     _name = 'production.volume.trends'
     _description = 'Production Volume Trends'
@@ -13,6 +14,13 @@ class ProductionVolumeTrends(models.Model):
     deviation_units = fields.Float(string='Deviation Units')
     deviation_percentage = fields.Float(string='Deviation %')
     plan_adherence_percentage = fields.Float(string='Plan Adherence %')
+    avg_forecast_accuracy = fields.Float(string='Average Forecast Accuracy %')
+    cumulative_deviation = fields.Float(string='Cumulative Deviation')
+    deviation_status = fields.Selection([
+        ('over', '📈 Overproduction'),
+        ('short', '📉 Shortfall'),
+        ('onplan', '✅ On Plan')
+    ], string='Deviation Status', readonly=True)
 
     def init(self):
         tools.drop_view_if_exists(self.env.cr, 'production_volume_trends')
@@ -35,7 +43,22 @@ class ProductionVolumeTrends(models.Model):
                         WHEN pdo.total_planned_qty > 0 
                         THEN ROUND((pdo.total_out * 100.0 / pdo.total_planned_qty)::numeric, 1)
                         ELSE 0
-                    END AS plan_adherence_percentage
+                    END AS plan_adherence_percentage,
+                    CASE 
+                        WHEN (pdo.total_out - pdo.total_planned_qty) > 0 THEN 'over'
+                        WHEN (pdo.total_out - pdo.total_planned_qty) < 0 THEN 'short'
+                        ELSE 'onplan'
+                    END AS deviation_status,
+                    CASE 
+                        WHEN pdo.total_planned_qty > 0 
+                        THEN ROUND(AVG(pdo.total_out * 100.0 / NULLIF(pdo.total_planned_qty,0)) 
+                                   OVER (PARTITION BY pt.id)::numeric, 1)
+                        ELSE 0
+                    END AS avg_forecast_accuracy,
+                    SUM(pdo.total_out - pdo.total_planned_qty) 
+OVER (PARTITION BY date_trunc('month', mp.planning_date), pt.id 
+      ORDER BY mp.planning_date 
+      ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) AS cumulative_deviation
                 FROM production_daily_operation pdo
                 JOIN mrp_planning mp ON pdo.production_plan_id = mp.id
                 JOIN product_template pt ON mp.product_id = pt.id

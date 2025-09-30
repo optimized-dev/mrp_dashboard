@@ -12,6 +12,9 @@
                 <field name="deviation_units"/>
                 <field name="deviation_percentage"/>
                 <field name="plan_adherence_percentage"/>
+                <field name="avg_forecast_accuracy"/>
+                <field name="cumulative_deviation"/>
+                <field name="deviation_status"/>
             </tree>
         </field>
     </record>
