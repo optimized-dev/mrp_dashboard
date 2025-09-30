@@ -8,7 +8,9 @@
                 <field name="product_id"/>
                 <field name="production_stage_id"/>
                 <field name="planned_qty"/>
+                <field name="planned_value"/>
                 <field name="actual_qty"/>
+                <field name="actual_value"/>
                 <field name="deviation_units"/>
                 <field name="deviation_percentage"/>
                 <field name="plan_adherence_percentage"/>

@@ -10,7 +10,9 @@ class ProductionVolumeTrends(models.Model):
     product_id = fields.Many2one('product.template', string='Product')
     production_stage_id = fields.Many2one('production.stage', string='Production Stage')
     planned_qty = fields.Float(string='Planned Quantity')
+    planned_value = fields.Float(string='Planned Value')
     actual_qty = fields.Float(string='Actual Quantity')
+    actual_value = fields.Float(string='Actual Value')
     deviation_units = fields.Float(string='Deviation Units')
     deviation_percentage = fields.Float(string='Deviation %')
     plan_adherence_percentage = fields.Float(string='Plan Adherence %')
@@ -30,6 +32,7 @@ class ProductionVolumeTrends(models.Model):
                     pdo.id AS id,
                     mp.planning_date AS date,
                     pt.id AS product_id,
+                        COALESCE(mp.total_cost,0) AS planned_value,
                     pdo.production_stage_id AS production_stage_id,
                     pdo.total_planned_qty AS planned_qty,
                     pdo.total_out AS actual_qty,
@@ -56,12 +59,21 @@ class ProductionVolumeTrends(models.Model):
                         ELSE 0
                     END AS avg_forecast_accuracy,
                     SUM(pdo.total_out - pdo.total_planned_qty) 
-OVER (PARTITION BY date_trunc('month', mp.planning_date), pt.id 
-      ORDER BY mp.planning_date 
-      ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) AS cumulative_deviation
+                        OVER (PARTITION BY date_trunc('month', mp.planning_date), pt.id 
+                              ORDER BY mp.planning_date 
+                              ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) AS cumulative_deviation,
+                    COALESCE(SUM(mdml.actual_value),0) 
+                    + COALESCE(SUM(dll.actual_value),0) 
+                    + COALESCE(SUM(pol.actual_value),0) AS actual_value
                 FROM production_daily_operation pdo
                 JOIN mrp_planning mp ON pdo.production_plan_id = mp.id
                 JOIN product_template pt ON mp.product_id = pt.id
+                LEFT JOIN pcc_production_costing ppc ON ppc.production_plan_id = mp.id
+                LEFT JOIN pcc_direct_material_line mdml ON mdml.costing_id = ppc.id
+                LEFT JOIN pcc_direct_labour_line dll ON dll.costing_id = ppc.id
+                LEFT JOIN pcc_production_overhead_line pol ON pol.costing_id = ppc.id
                 WHERE mp.planning_date <= CURRENT_DATE
+                GROUP BY pdo.id, mp.planning_date, pt.id, pdo.production_stage_id, 
+                         pdo.total_planned_qty, pdo.total_out,mp.total_cost
             )
         """)
