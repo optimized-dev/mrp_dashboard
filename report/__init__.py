@@ -20,4 +20,5 @@ from . import cost_resource_consumption
 from . import plan_vs_purchase
 from . import wastage_plan
 from . import recovery_ratio
+from . import recovery_ratio_history
 

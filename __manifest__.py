@@ -53,6 +53,7 @@
         'report/plan_vs_purchase_views.xml',
         'report/wastage_plan_views.xml',
         'report/recovery_ratio_views.xml',
+        'report/recovery_ratio_history_views.xml',
     ],
     # 'assets': {
     #     'web.assets_backend': [
